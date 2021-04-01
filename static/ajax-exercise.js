@@ -51,18 +51,17 @@ function orderMelons(evt) {
     evt.preventDefault();
 
     // TODO: show the result message after your form
-   const formInputs = {
-       'melon_type': $('melon-type-field').val(),
-       'qty': $('qty-field').val()
-   };
-
-   $.post('/order-melons-json', formInputs, (res) => {
-       $('#order-status').html(`${res.code}`);
-       $('#order-status').html(`${res.msg}`);
-   });
-
+    const formInputs = {
+        'melon_type': $('#melon-type-field').val(),
+        'qty': $('#qty-field').val()
+    };
     // TODO: if the result code is ERROR, make it show up in red (see our CSS!)
-}
+    $.post('/order-melons.json', formInputs, (resp) => {
+        alert(`${resp.code}`);
+        alert(`${resp.msg}`);
+    });
+    
+};
 
 $("#order-form").on('submit', orderMelons);
 
