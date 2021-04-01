@@ -29,14 +29,15 @@ function showWeather(evt) {
 
     let url = "/weather.json";
     let formData = {"zipcode": $("#zipcode-field").val()};
-
+ // TODO: request weather with that URL and show the forecast in #weather-info
     $.get('/weather.json', formData, (res)=> {
         //alert(`This is the forecast ${res.forecast}`)
         $('#weather-info').html(`${res.forecast}`);
     });
 
 
-    // TODO: request weather with that URL and show the forecast in #weather-info
+   
+
 };
 
 $("#weather-form").on('submit', showWeather);
@@ -50,6 +51,16 @@ function orderMelons(evt) {
     evt.preventDefault();
 
     // TODO: show the result message after your form
+   const formInputs = {
+       'melon_type': $('melon-type-field').val(),
+       'qty': $('qty-field').val()
+   };
+
+   $.post('/order-melons-json', formInputs, (res) => {
+       $('#order-status').html(`${res.code}`);
+       $('#order-status').html(`${res.msg}`);
+   });
+
     // TODO: if the result code is ERROR, make it show up in red (see our CSS!)
 }
 
